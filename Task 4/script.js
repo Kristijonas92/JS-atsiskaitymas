@@ -10,3 +10,22 @@ bent minimalų stilių;
 -------------------------------------------------------------------------- */
 
 const ENDPOINT = 'cars.json';
+
+const createBrandCard = car => {
+    return `
+      <div class="brand-card">
+        <h3>${car.brand}</h3>
+        <ul>
+          ${car.models.map(model => `<li>${model}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+  
+  fetch(ENDPOINT)
+    .then(response => response.json())
+    .then(cars => {
+      const brandCards = cars.map(createBrandCard);
+      document.querySelector('main .wrapper .container #output').innerHTML = brandCards.join('');
+    });
+  
